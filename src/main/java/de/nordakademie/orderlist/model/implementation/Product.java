@@ -1,9 +1,11 @@
+package de.nordakademie.orderlist.model.implementation;
+
 /**
  * A generic product to be ordered.
  *
  * @author Christopher Karow
  */
-public class Product {
+public abstract class Product implements IProduct {
 
     private static int productNo = 0;
     private String name;
@@ -27,12 +29,5 @@ public class Product {
 
     public int getId() {
         return id;
-    }
-
-    public int getPrice() {
-        return 0;
-    }
-
-    public void print() {
     }
 }

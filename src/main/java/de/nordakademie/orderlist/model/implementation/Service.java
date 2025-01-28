@@ -1,3 +1,5 @@
+package de.nordakademie.orderlist.model.implementation;
+
 /**
  * A service carried out by one or more employees.
  *

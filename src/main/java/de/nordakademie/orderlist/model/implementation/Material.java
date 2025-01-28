@@ -1,3 +1,5 @@
+package de.nordakademie.orderlist.model.implementation;
+
 /**
  * A material which may be ordered.
  *

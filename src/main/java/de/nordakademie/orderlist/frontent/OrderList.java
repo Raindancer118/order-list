@@ -1,3 +1,12 @@
+package de.nordakademie.orderlist.frontent;
+
+import de.nordakademie.orderlist.model.factory.MaterialFactory;
+import de.nordakademie.orderlist.model.factory.ServiceFactory;
+import de.nordakademie.orderlist.model.implementation.IProduct;
+import de.nordakademie.orderlist.model.implementation.Material;
+import de.nordakademie.orderlist.model.implementation.Product;
+import de.nordakademie.orderlist.model.implementation.Service;
+
 import java.util.Scanner;
 
 /**
@@ -9,12 +18,10 @@ public class OrderList {
 
     private Scanner scanner = new Scanner(System.in);
 
-    private Product[] products = new Product[5];
+    private IProduct[] products = new Product[5];
+    private MaterialFactory materialFactory = new MaterialFactory();
+    private ServiceFactory serviceFactory = new ServiceFactory();
     private int index = 0;
-
-    public static void main(String[] args) {
-        new OrderList().menuLoop();
-    }
 
     public void menuLoop() {
         int selection;
@@ -26,10 +33,10 @@ public class OrderList {
                 case 0:
                     break;
                 case 1:
-                    orderMaterial(this.index++);
+                    materialFactory.orderMaterial(this.index++);
                     break;
                 case 2:
-                    orderService(this.index++);
+                    serviceFactory.orderService(this.index++);
                     break;
                 default:
                     System.out.println("ungültig");
@@ -63,40 +70,11 @@ public class OrderList {
 
                 if (this.products[j + 1] != null &&
                         this.products[j + 1].getPrice() < this.products[j].getPrice()) {
-                    Product temp = this.products[j + 1];
+                    IProduct temp = this.products[j + 1];
                     this.products[j + 1] = this.products[j];
                     this.products[j] = temp;
                 }
             }
         }
     }
-
-    private void orderService(int index) {
-        System.out.println("Leistungsart?");
-        this.scanner.nextLine(); // Needed to prevent the scanner from skipping the line
-        String name = this.scanner.nextLine();
-
-        System.out.println("Personenzahl?");
-        int employees = this.scanner.nextInt();
-
-        System.out.println("Stunden?");
-        int hours = this.scanner.nextInt();
-
-        this.products[index] = new Service(name, hours, employees);
-    }
-
-    private void orderMaterial(int index) {
-        System.out.println("Materialname?");
-        this.scanner.nextLine(); // Needed to prevent the scanner from skipping the line
-        String name = this.scanner.nextLine();
-
-        System.out.println("Stückpreis in Cent?");
-        int pricePerUnit = this.scanner.nextInt();
-
-        System.out.println("Stückzahl?");
-        int amount = this.scanner.nextInt();
-
-        this.products[index] = new Material(name, pricePerUnit, amount);
-    }
-
 }
